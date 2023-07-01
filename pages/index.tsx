@@ -14,6 +14,16 @@ export default function Home({ dirs }: Props) {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedFile, setSelectedFile] = useState<File>();
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return; // Guard clause
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setSelectedImage(imageUrl);
+      setSelectedFile(file);
+    }
+  };
+
   const handleUpload = async () => {
     setUploading(true);
     try {
@@ -32,7 +42,7 @@ export default function Home({ dirs }: Props) {
     <>
       <div className="mx-auto max-w-4xl space-y-6 p-20">
         <label>
-          <input type="file" hidden />
+          <input type="file" hidden onChange={handleFileChange} />
           <div className="flex aspect-video w-40 cursor-pointer items-center justify-center rounded border-2 border-dashed">
             {selectedImage ? (
               <img src={selectedImage} alt="" />
