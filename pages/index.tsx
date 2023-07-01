@@ -37,7 +37,7 @@ export default function Home({ dirs }: Props) {
             {selectedImage ? (
               <img src={selectedImage} alt="" />
             ) : (
-              <span>Select Image</span>
+              <span className="text-black">Select Image</span>
             )}
           </div>
         </label>

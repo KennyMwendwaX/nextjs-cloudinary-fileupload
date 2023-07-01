@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <main className={roboto.className}>
-        <div className="min-h-screen">
+        <div className="min-h-screen bg-gray-50">
           <Component {...pageProps} />
         </div>
       </main>
