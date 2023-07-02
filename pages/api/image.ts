@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import formidable from "formidable";
 import path from "path";
 import fs from "fs/promises";
+import { prisma } from "@/utils/db";
 
 export const config = {
   api: {
@@ -9,7 +10,7 @@ export const config = {
   },
 };
 
-const readFile = (
+const readFile = async (
   req: NextApiRequest,
   saveLocally?: boolean
 ): Promise<{ fields: formidable.Fields; files: formidable.Files }> => {
@@ -40,5 +41,6 @@ export default async function handler(
     await fs.mkdir(path.join(process.cwd() + "/public", "/images"));
   }
   await readFile(req, true);
+
   res.status(201).json({ message: "File uploaded successfully" });
 }
