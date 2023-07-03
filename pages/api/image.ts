@@ -26,27 +26,17 @@ const readFile = async (
   return new Promise((resolve, reject) => {
     form.parse(req, async (err, fields, files) => {
       if (err) reject(err);
-      let filename,
-        originalName,
-        fileType,
-        fileSize,
-        filePath = null;
-      if (!Array.isArray(files.file)) {
-        filename = files.file.newFilename;
-        originalName = files.file.originalFilename;
-        fileType = files.file.mimetype;
-        fileSize = files.file.size;
-        filePath = files.file.filepath;
-      }
+      const myImageFiles = files.myImage as formidable.File[];
+      const file = myImageFiles[0];
 
       try {
         await prisma.file.create({
           data: {
-            filename: filename as string,
-            originalName: originalName as string,
-            fileType: fileType as string,
-            fileSize: fileSize as number,
-            filePath: filePath as string,
+            filename: file.newFilename,
+            originalName: file.originalFilename as string,
+            fileType: file.mimetype as string,
+            fileSize: file.size,
+            filePath: file.filepath,
           },
         });
         resolve({ fields, files });
