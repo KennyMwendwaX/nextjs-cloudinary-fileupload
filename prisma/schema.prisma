@@ -16,5 +16,6 @@ model File {
   originalName String
   fileType     String
   fileSize     Int
+  filePath     String
   createdAt    DateTime @default(now())
 }
