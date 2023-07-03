@@ -62,7 +62,7 @@ export default function Home({ dirs }: Props) {
         <div className="mt-20 flex flex-col space-y-3">
           {dirs.map((item) => (
             <Link key={item} href={"/images/" + item}>
-              <a className="text-blue-500 hover:underline">{item}</a>
+              <div className="text-blue-500 hover:underline">{item}</div>
             </Link>
           ))}
         </div>

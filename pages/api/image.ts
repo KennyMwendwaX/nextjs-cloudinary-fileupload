@@ -24,9 +24,35 @@ const readFile = async (
   options.maxFileSize = 4000 * 1024 * 1024;
   const form = formidable(options);
   return new Promise((resolve, reject) => {
-    form.parse(req, (err, fields, files) => {
+    form.parse(req, async (err, fields, files) => {
       if (err) reject(err);
-      resolve({ fields, files });
+      let filename,
+        originalName,
+        fileType,
+        fileSize,
+        filePath = null;
+      if (!Array.isArray(files.file)) {
+        filename = files.file.newFilename;
+        originalName = files.file.originalFilename;
+        fileType = files.file.mimetype;
+        fileSize = files.file.size;
+        filePath = files.file.filepath;
+      }
+
+      try {
+        await prisma.file.create({
+          data: {
+            filename: filename as string,
+            originalName: originalName as string,
+            fileType: fileType as string,
+            fileSize: fileSize as number,
+            filePath: filePath as string,
+          },
+        });
+        resolve({ fields, files });
+      } catch (error) {
+        reject(error);
+      }
     });
   });
 };
