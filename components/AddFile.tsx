@@ -1,16 +1,7 @@
 import { useState } from "react";
-import { HiEmojiHappy, HiPlus } from "react-icons/hi";
+import { HiPlus } from "react-icons/hi";
 import { MdClose } from "react-icons/md";
-import { TbBlockquote } from "react-icons/tb";
-import {
-  FaBold,
-  FaCode,
-  FaHeading,
-  FaItalic,
-  FaLink,
-  FaListOl,
-  FaListUl,
-} from "react-icons/fa";
+import axios from "axios";
 
 type FormValues = {
   title: string;
@@ -23,6 +14,31 @@ export default function AddFile() {
 
   const handleModalToggle = () => {
     setShowModal(!showModal);
+  };
+
+  const [uploading, setUploading] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File>();
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return; // Guard clause
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+    }
+  };
+
+  const handleUpload = async () => {
+    setUploading(true);
+    try {
+      if (!selectedFile) return;
+      const formData = new FormData();
+      formData.append("uploadedFile", selectedFile);
+      const { data } = await axios.post("/api/image", formData);
+      console.log(data);
+    } catch (error: any) {
+      console.log(error.response?.data);
+    }
+    setUploading(false);
   };
 
   return (
@@ -56,18 +72,17 @@ export default function AddFile() {
               </button>
             </div>
             {/* Modal body */}
-            <div className="">
-              <label
-                className="mb-2 block text-sm font-medium text-gray-900"
-                htmlFor="file">
-                Upload file
-              </label>
+            <div>
+              <div className="mb-1 text-sm font-medium">Upload File</div>
               <input
-                className="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none"
-                aria-describedby="file_upload"
-                id="file"
                 type="file"
+                className="text-grey-500 w-full cursor-pointer rounded-lg border-2 border-gray-900 bg-gray-100 pr-20 text-sm file:mr-5 file:border-0 file:bg-gray-900
+             file:px-6 file:py-2 file:text-sm file:font-medium file:text-white hover:file:cursor-pointer"
+                onChange={handleFileChange}
               />
+              <p className="mt-1 text-xs text-gray-500">
+                IMG, DOCX, PDF or mp3 (MAX. 800x800px).
+              </p>
             </div>
           </div>
         </div>
