@@ -6,7 +6,6 @@ import { FaTrash } from "react-icons/fa";
 interface File {
   id: string;
   filename: string;
-  originalName: string;
   fileType: string;
   fileSize: number;
   filePath: string;

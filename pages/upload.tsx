@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 interface File {
   id: string;
   filename: string;
-  originalName: string;
   fileType: string;
   fileSize: number;
   filePath: string;
@@ -45,20 +44,6 @@ export default function Upload() {
       </Head>
       <div className="container mx-auto mb-2 px-5 pt-20">
         <AddFile fetchFiles={fetchFiles} />
-        {/* {notes.length > 0 ? (
-            notes.map((note) => (
-              <NoteItem
-                key={note.id}
-                note={note}
-                handleNoteModalToggle={handleNoteModalToggle}
-              />
-            ))
-          ) : (
-            <div className="ml-4 pt-2">
-              No notes available, click the Add Notes button to add a note.
-            </div>
-          )} */}
-        File List
         <Table files={files} />
       </div>
     </>

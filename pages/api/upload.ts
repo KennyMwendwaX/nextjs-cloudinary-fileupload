@@ -18,7 +18,7 @@ const readFile = async (
   if (saveLocally) {
     options.uploadDir = path.join(process.cwd(), "/public/images");
     options.filename = (name, ext, path, form) => {
-      return Date.now().toString() + "_" + path.originalFilename;
+      return path.originalFilename as string;
     };
   }
   options.maxFileSize = 4000 * 1024 * 1024;
@@ -34,7 +34,6 @@ const readFile = async (
         await prisma.file.create({
           data: {
             filename: file.newFilename,
-            originalName: file.originalFilename as string,
             fileType: file.mimetype as string,
             fileSize: file.size,
             filePath: file.filepath,
