@@ -56,7 +56,19 @@ export default function AddFile() {
               </button>
             </div>
             {/* Modal body */}
-            <div className="text-black">Modal Body</div>
+            <div className="">
+              <label
+                className="mb-2 block text-sm font-medium text-gray-900"
+                htmlFor="file">
+                Upload file
+              </label>
+              <input
+                className="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none"
+                aria-describedby="file_upload"
+                id="file"
+                type="file"
+              />
+            </div>
           </div>
         </div>
       )}

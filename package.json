@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "watchcss": "npx tailwindcss -o styles/globals.css --watch",
+    "buildcss": "npx tailwindcss -o styles/globals.css --minify"
   },
   "dependencies": {
     "@prisma/client": "^4.16.1",
