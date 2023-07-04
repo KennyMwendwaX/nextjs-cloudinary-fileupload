@@ -2,7 +2,6 @@
 CREATE TABLE "File" (
     "id" TEXT NOT NULL,
     "filename" TEXT NOT NULL,
-    "originalName" TEXT NOT NULL,
     "fileType" TEXT NOT NULL,
     "fileSize" INTEGER NOT NULL,
     "filePath" TEXT NOT NULL,

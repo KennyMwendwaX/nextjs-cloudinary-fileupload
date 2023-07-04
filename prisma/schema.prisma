@@ -11,11 +11,10 @@ datasource db {
 }
 
 model File {
-  id           String   @id @default(cuid())
-  filename     String
-  originalName String
-  fileType     String
-  fileSize     Int
-  filePath     String
-  createdAt    DateTime @default(now())
+  id        String   @id @default(cuid())
+  filename  String
+  fileType  String
+  fileSize  Int
+  filePath  String
+  createdAt DateTime @default(now())
 }
