@@ -29,7 +29,7 @@ export default function Home({ dirs }: Props) {
     try {
       if (!selectedFile) return;
       const formData = new FormData();
-      formData.append("myImage", selectedFile);
+      formData.append("uploadedFile", selectedFile);
       const { data } = await axios.post("/api/image", formData);
       console.log(data);
     } catch (error: any) {

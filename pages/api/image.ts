@@ -26,8 +26,8 @@ const readFile = async (
   return new Promise((resolve, reject) => {
     form.parse(req, async (err, fields, files) => {
       if (err) reject(err);
-      const myImageFiles = files.myImage as formidable.File[];
-      const file = myImageFiles[0];
+      const myFiles = files.uploadedFile as formidable.File[];
+      const file = myFiles[0];
 
       try {
         await prisma.file.create({
