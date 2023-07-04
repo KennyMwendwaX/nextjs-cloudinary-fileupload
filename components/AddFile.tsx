@@ -3,12 +3,6 @@ import { HiPlus } from "react-icons/hi";
 import { MdClose } from "react-icons/md";
 import axios from "axios";
 
-type FormValues = {
-  title: string;
-  category: string;
-  content: string;
-};
-
 export default function AddFile() {
   const [showModal, setShowModal] = useState(false);
 
@@ -33,7 +27,7 @@ export default function AddFile() {
       if (!selectedFile) return;
       const formData = new FormData();
       formData.append("uploadedFile", selectedFile);
-      const { data } = await axios.post("/api/image", formData);
+      const { data } = await axios.post("/api/upload", formData);
       console.log(data);
     } catch (error: any) {
       console.log(error.response?.data);
