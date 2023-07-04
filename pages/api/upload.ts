@@ -52,6 +52,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  if (req.method !== "POST")
+    return res.status(405).json({ message: "Method Not Allowed" });
+
   try {
     await fs.readdir(path.join(process.cwd() + "/public", "/images"));
   } catch (error) {
