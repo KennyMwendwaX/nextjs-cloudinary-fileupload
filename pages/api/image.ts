@@ -26,6 +26,7 @@ const readFile = async (
   return new Promise((resolve, reject) => {
     form.parse(req, async (err, fields, files) => {
       if (err) reject(err);
+      // The name "uploadedFile" comes from formData.append("uploadedFile", selectedFile)
       const myFiles = files.uploadedFile as formidable.File[];
       const file = myFiles[0];
 
