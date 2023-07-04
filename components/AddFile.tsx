@@ -3,7 +3,11 @@ import { HiPlus } from "react-icons/hi";
 import { MdClose } from "react-icons/md";
 import axios from "axios";
 
-export default function AddFile() {
+type Props = {
+  fetchFiles: () => void;
+};
+
+export default function AddFile({ fetchFiles }: Props) {
   const [showModal, setShowModal] = useState(false);
 
   const handleModalToggle = () => {
@@ -27,12 +31,15 @@ export default function AddFile() {
       if (!selectedFile) return;
       const formData = new FormData();
       formData.append("uploadedFile", selectedFile);
-      const { data } = await axios.post("/api/upload", formData);
-      console.log(data);
+      const res = await axios.post("/api/upload", formData);
+      if (res.status === 201) {
+        fetchFiles(); // Trigger refetch of files
+      }
     } catch (error: any) {
       console.log(error.response?.data);
     }
     setUploading(false);
+    setShowModal(false);
   };
 
   return (

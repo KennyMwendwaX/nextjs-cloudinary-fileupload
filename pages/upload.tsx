@@ -1,4 +1,5 @@
 import AddFile from "@/components/AddFile";
+import Table from "@/components/Table";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
@@ -43,9 +44,8 @@ export default function Upload() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container mx-auto mb-2 px-5 pt-20">
-        <AddFile />
-        <div className="-m-4 flex flex-wrap">
-          {/* {notes.length > 0 ? (
+        <AddFile fetchFiles={fetchFiles} />
+        {/* {notes.length > 0 ? (
             notes.map((note) => (
               <NoteItem
                 key={note.id}
@@ -58,8 +58,8 @@ export default function Upload() {
               No notes available, click the Add Notes button to add a note.
             </div>
           )} */}
-          Table
-        </div>
+        File List
+        <Table files={files} />
       </div>
     </>
   );
