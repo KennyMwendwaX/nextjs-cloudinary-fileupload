@@ -23,7 +23,6 @@ export default function TableRow({ file, index }: Props) {
       <tr className="border-b">
         <td className="px-4 py-3">{index}</td>
         <td className="px-4 py-3">{file.filename}</td>
-        <td className="px-4 py-3">{file.originalName}</td>
         <td className="px-4 py-3">{formatBytes(file.fileSize)}</td>
         <td className="px-4 py-3">
           {/* onClick={() => handleDownload(file.id)}  */}
