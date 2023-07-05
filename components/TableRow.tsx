@@ -12,7 +12,7 @@ interface Props {
 export default function TableRow({ file, index }: Props) {
   return (
     <>
-      <tr className="border-b">
+      <tr className="border-b border-gray-300">
         <td className="px-4 py-3">{index}</td>
         <td className="px-4 py-3">{file.filename}</td>
         <td className="px-4 py-3">{formatBytes(file.fileSize)}</td>

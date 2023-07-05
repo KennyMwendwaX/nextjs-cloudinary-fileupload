@@ -10,8 +10,8 @@ export default function Table({ files }: Props) {
     <>
       {files.length > 0 ? (
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-gray-500">
-            <thead className="bg-gray-50 text-xs uppercase text-gray-700">
+          <table className="w-full text-left text-sm text-gray-700">
+            <thead className="rounded-t-lg bg-gray-200 text-xs uppercase text-gray-900">
               <tr>
                 <th scope="col" className="px-4 py-3">
                   No.
