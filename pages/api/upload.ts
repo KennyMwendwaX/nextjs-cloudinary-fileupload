@@ -31,7 +31,7 @@ const readFile = async (
       const file = myFiles[0];
 
       try {
-        await prisma.file.create({
+        const uploaded_file = await prisma.file.create({
           data: {
             filename: file.newFilename,
             fileType: file.mimetype as string,
@@ -39,7 +39,12 @@ const readFile = async (
             filePath: file.filepath,
           },
         });
-        resolve({ fields, files });
+
+        if (uploaded_file) {
+          resolve({ fields, files });
+        } else {
+          reject(new Error("Failed to save file details to the database."));
+        }
       } catch (error) {
         reject(error);
       }

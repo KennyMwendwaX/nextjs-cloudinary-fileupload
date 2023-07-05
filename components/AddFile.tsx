@@ -39,7 +39,6 @@ export default function AddFile({ fetchFiles }: Props) {
       console.log(error.response?.data);
     }
     setUploading(false);
-    setShowModal(false);
   };
 
   return (
