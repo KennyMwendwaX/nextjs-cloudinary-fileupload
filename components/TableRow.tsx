@@ -2,15 +2,7 @@ import formatBytes from "@/utils/formatBytes";
 import { formatDateTime } from "@/utils/formatDateTime";
 import { HiDownload } from "react-icons/hi";
 import { FaTrash } from "react-icons/fa";
-
-interface File {
-  id: string;
-  filename: string;
-  fileType: string;
-  fileSize: number;
-  filePath: string;
-  createdAt: number;
-}
+import type File from "@/types/File";
 
 interface Props {
   file: File;

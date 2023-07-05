@@ -1,13 +1,5 @@
 import TableRow from "./TableRow";
-
-interface File {
-  id: string;
-  filename: string;
-  fileType: string;
-  fileSize: number;
-  filePath: string;
-  createdAt: number;
-}
+import type File from "@/types/File";
 
 interface Props {
   files: File[];

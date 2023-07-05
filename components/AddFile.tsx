@@ -76,26 +76,26 @@ export default function AddFile({ fetchFiles }: Props) {
             </div>
             {/* Modal body */}
             <div>
-              <div>
+              <form onSubmit={handleUpload}>
                 <div className="mb-1 text-sm font-medium">Upload File</div>
                 <input
                   type="file"
                   className="text-grey-500 w-full cursor-pointer rounded-lg border-2 border-gray-900 bg-gray-50 pr-20 text-sm file:mr-5 file:border-0 file:bg-gray-900
              file:px-6 file:py-2 file:text-sm file:font-medium file:text-white hover:file:cursor-pointer"
                   onChange={handleFileChange}
+                  required
                 />
                 <p className="mt-1 text-xs text-gray-500">
                   IMG, DOCX, PDF or mp3 (MAX. 800x800px).
                 </p>
-              </div>
-
-              <button
-                onClick={handleUpload}
-                disabled={uploading}
-                style={{ opacity: uploading ? ".5" : "1" }}
-                className="mt-4 w-32 rounded bg-red-600 py-2 text-center text-white">
-                {uploading ? "Uploading.." : "Upload"}
-              </button>
+                <button
+                  type="submit"
+                  disabled={uploading}
+                  style={{ opacity: uploading ? ".5" : "1" }}
+                  className="mt-4 w-32 rounded bg-red-600 py-2 text-center text-white">
+                  {uploading ? "Uploading.." : "Upload"}
+                </button>
+              </form>
             </div>
           </div>
         </div>
