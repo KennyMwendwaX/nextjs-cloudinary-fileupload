@@ -3,6 +3,7 @@ import { formatDateTime } from "@/utils/formatDateTime";
 import { HiDownload } from "react-icons/hi";
 import { FaTrash } from "react-icons/fa";
 import type File from "@/types/File";
+import { useRouter } from "next/router";
 
 interface Props {
   file: File;
@@ -10,6 +11,17 @@ interface Props {
 }
 
 export default function TableRow({ file, index }: Props) {
+  const router = useRouter();
+
+  const handleDelete = async (fileId: string) => {
+    await fetch(`/api/delete/${fileId}`, {
+      method: "DELETE",
+    });
+  };
+
+  const handleDownload = (filename: string) => {
+    router.push(`/files/${filename}`);
+  };
   return (
     <>
       <tr className="border-b border-gray-300">
@@ -18,8 +30,7 @@ export default function TableRow({ file, index }: Props) {
         <td className="px-4 py-3">{formatBytes(file.fileSize)}</td>
         <td className="px-4 py-3">{file.fileType}</td>
         <td className="px-4 py-3">
-          {/* onClick={() => handleDownload(file.id)}  */}
-          <button>
+          <button onClick={() => handleDownload(file.filename)}>
             <HiDownload className="h-5 w-5 cursor-pointer" />
           </button>
         </td>
