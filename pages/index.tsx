@@ -24,7 +24,7 @@ export default function Upload() {
 
   useEffect(() => {
     fetchFiles();
-  }, [files]);
+  }, []);
 
   return (
     <>

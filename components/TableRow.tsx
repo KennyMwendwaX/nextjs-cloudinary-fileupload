@@ -19,9 +19,35 @@ export default function TableRow({ file, index }: Props) {
     });
   };
 
-  const handleDownload = (filename: string) => {
-    router.push(`/files/${filename}`);
+  const handleDownload = async (fileId: string) => {
+    try {
+      const response = await fetch(`/api/download/${fileId}`);
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      // Get the filename from the Content-Disposition header
+      const contentDisposition = response.headers.get("Content-Disposition");
+      const filenameMatch =
+        contentDisposition && contentDisposition.match(/filename="(.+)"/);
+      const filename = filenameMatch ? filenameMatch[1] : "file";
+
+      // Create a temporary link and simulate a click to trigger the download
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      link.click();
+
+      // Clean up the temporary link and revoke the URL
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading file:", error);
+    }
   };
+
   return (
     <>
       <tr className="border-b border-gray-300">

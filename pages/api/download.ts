@@ -26,7 +26,7 @@ export default async function handler(
       const filePath = path.join(
         process.cwd(),
         "public",
-        "images",
+        "files",
         file.filename
       );
 
