@@ -16,7 +16,7 @@ const readFile = async (
 ): Promise<{ fields: formidable.Fields; files: formidable.Files }> => {
   const options: formidable.Options = {};
   if (saveLocally) {
-    options.uploadDir = path.join(process.cwd(), "/public/images");
+    options.uploadDir = path.join(process.cwd(), "/public/files");
     options.filename = (name, ext, path, form) => {
       return path.originalFilename as string;
     };
@@ -60,9 +60,9 @@ export default async function handler(
     return res.status(405).json({ message: "Method Not Allowed" });
 
   try {
-    await fs.readdir(path.join(process.cwd() + "/public", "/images"));
+    await fs.readdir(path.join(process.cwd() + "/public", "/files"));
   } catch (error) {
-    await fs.mkdir(path.join(process.cwd() + "/public", "/images"));
+    await fs.mkdir(path.join(process.cwd() + "/public", "/files"));
   }
   await readFile(req, true);
 
