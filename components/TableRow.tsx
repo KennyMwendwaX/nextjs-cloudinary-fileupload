@@ -21,7 +21,9 @@ export default function TableRow({ file, index }: Props) {
 
   const handleDownload = async (fileId: string) => {
     try {
-      const response = await fetch(`/api/download/${fileId}`);
+      const response = await fetch(`/api/download/${fileId}`, {
+        method: "GET",
+      });
       if (!response.ok) {
         throw new Error(response.statusText);
       }
