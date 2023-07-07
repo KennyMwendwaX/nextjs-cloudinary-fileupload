@@ -50,6 +50,17 @@ export default function TableRow({ file, index }: Props) {
     }
   };
 
+  const handleDeleteNote = async (id: string) => {
+    try {
+      await fetch(`/api/delete/${id}`, {
+        method: "DELETE",
+      });
+      // fetchFiles(); // Fetch the updated list of files after deletion
+    } catch (error) {
+      console.error("Error deleting file:", error);
+    }
+  };
+
   return (
     <>
       <tr className="border-b border-gray-300">
@@ -64,8 +75,7 @@ export default function TableRow({ file, index }: Props) {
           </button>
         </td>
         <td className="px-4 py-3">
-          {/* onClick={() => handleDelete(file.id)} */}
-          <button>
+          <button onClick={() => handleDelete(file.id)}>
             <FaTrash className="h-4 w-4 cursor-pointer" />
           </button>
         </td>
