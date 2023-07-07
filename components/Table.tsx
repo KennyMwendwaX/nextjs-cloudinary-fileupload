@@ -26,6 +26,9 @@ export default function Table({ files }: Props) {
                   Filetype
                 </th>
                 <th scope="col" className="px-4 py-3">
+                  Download Count
+                </th>
+                <th scope="col" className="px-4 py-3">
                   Download
                 </th>
                 <th scope="col" className="px-4 py-3">

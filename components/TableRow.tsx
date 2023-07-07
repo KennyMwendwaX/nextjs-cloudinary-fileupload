@@ -57,6 +57,7 @@ export default function TableRow({ file, index }: Props) {
         <td className="px-4 py-3">{file.filename}</td>
         <td className="px-4 py-3">{formatBytes(file.fileSize)}</td>
         <td className="px-4 py-3">{file.fileType}</td>
+        <td className="px-4 py-3">{file.downloadCount}</td>
         <td className="px-4 py-3">
           <button onClick={() => handleDownload(file.id)}>
             <HiDownload className="h-5 w-5 cursor-pointer" />
