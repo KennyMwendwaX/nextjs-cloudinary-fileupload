@@ -36,7 +36,7 @@ export default function Upload() {
       </Head>
       <div className="container mx-auto mb-2 px-5 pt-12">
         <AddFile fetchFiles={fetchFiles} />
-        <Table files={files} />
+        <Table files={files} fetchFiles={fetchFiles} />
       </div>
     </>
   );

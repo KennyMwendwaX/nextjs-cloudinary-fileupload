@@ -3,9 +3,10 @@ import type File from "@/types/File";
 
 interface Props {
   files: File[];
+  fetchFiles: () => void;
 }
 
-export default function Table({ files }: Props) {
+export default function Table({ files, fetchFiles }: Props) {
   return (
     <>
       {files.length > 0 ? (
@@ -41,7 +42,12 @@ export default function Table({ files }: Props) {
             </thead>
             <tbody>
               {files.map((file, index) => (
-                <TableRow key={file.id} index={index + 1} file={file} />
+                <TableRow
+                  key={file.id}
+                  index={index + 1}
+                  fetchFiles={fetchFiles}
+                  file={file}
+                />
               ))}
             </tbody>
           </table>

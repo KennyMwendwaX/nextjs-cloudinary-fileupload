@@ -8,9 +8,10 @@ import { useRouter } from "next/router";
 interface Props {
   file: File;
   index: number;
+  fetchFiles: () => void;
 }
 
-export default function TableRow({ file, index }: Props) {
+export default function TableRow({ file, index, fetchFiles }: Props) {
   const router = useRouter();
 
   const handleDelete = async (fileId: string) => {
@@ -48,6 +49,8 @@ export default function TableRow({ file, index }: Props) {
     } catch (error) {
       console.error("Error downloading file:", error);
     }
+
+    fetchFiles();
   };
 
   const handleDeleteNote = async (id: string) => {
