@@ -23,24 +23,37 @@ export default async function handler(
         return;
       }
 
-      const filePath = path.join(
-        process.cwd(),
-        "public",
-        "files",
-        file.filename
-      );
+      const incrementDownloadCount = await prisma.file.update({
+        where: {
+          id: fileId,
+        },
+        data: {
+          downloadCount: file.downloadCount + 1,
+        },
+      });
 
-      const fileStats = await statAsync(filePath);
+      if (incrementDownloadCount) {
+        const filePath = path.join(
+          process.cwd(),
+          "public",
+          "files",
+          file.filename
+        );
 
-      res.setHeader(
-        "Content-Disposition",
-        `attachment; filename="${file.filename}"`
-      );
-      res.setHeader("Content-Length", fileStats.size.toString());
-      res.setHeader("Content-Type", file.fileType);
+        const fileStats = await statAsync(filePath);
 
-      const fileStream = fs.createReadStream(filePath);
-      fileStream.pipe(res);
+        res.setHeader(
+          "Content-Disposition",
+          `attachment; filename="${file.filename}"`
+        );
+        res.setHeader("Content-Length", fileStats.size.toString());
+        res.setHeader("Content-Type", file.fileType);
+
+        const fileStream = fs.createReadStream(filePath);
+        fileStream.pipe(res);
+      } else {
+        throw new Error("Error Downloading File");
+      }
     } catch (error) {
       console.error("Error retrieving file:", error);
       res.status(500).json({ message: "Failed to retrieve file" });
