@@ -2,6 +2,7 @@ import { useState } from "react";
 import { HiPlus } from "react-icons/hi";
 import { MdClose } from "react-icons/md";
 import axios from "axios";
+import { FaSearch } from "react-icons/fa";
 
 type Props = {
   fetchFiles: () => void;
@@ -43,12 +44,32 @@ export default function AddFile({ fetchFiles }: Props) {
 
   return (
     <>
-      <button
-        onClick={handleModalToggle}
-        className="mb-4 flex items-center rounded-lg border border-gray-400 bg-transparent px-5 py-2.5 text-sm font-medium text-gray-700 hover:border-gray-800 hover:bg-gray-800 hover:text-gray-100 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200">
-        <HiPlus className="mr-1 h-5 w-5" />
-        Upload File
-      </button>
+      <div className="mb-4 flex items-center justify-between">
+        <button
+          onClick={handleModalToggle}
+          className="flex items-center rounded-lg border border-gray-400 bg-transparent px-5 py-2.5 text-sm font-medium text-gray-700 hover:border-gray-800 hover:bg-gray-800 hover:text-gray-100 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200">
+          <HiPlus className="mr-1 h-5 w-5" />
+          Upload File
+        </button>
+
+        {/* Search bar */}
+        <div
+          className="hidden w-full items-center justify-between md:order-1 md:flex md:w-auto"
+          id="navbar-search">
+          <div className="relative hidden md:block">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+              <FaSearch />
+              <span className="sr-only">Search icon</span>
+            </div>
+            <input
+              type="text"
+              id="search-navbar"
+              className="block w-full rounded-lg border border-gray-500 bg-gray-50 p-2.5 pl-10 text-sm text-gray-800 focus:border-blue-600 focus:outline-none"
+              placeholder="Search files..."
+            />
+          </div>
+        </div>
+      </div>
 
       {/* Modal */}
       {showModal && (
