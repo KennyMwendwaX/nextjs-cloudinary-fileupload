@@ -106,7 +106,7 @@ export default function AddFile({ fetchFiles }: Props) {
                   required
                 />
                 <p className="mt-1 text-xs text-gray-500">
-                  IMG, DOCX, PDF or mp3 (MAX. 800x800px).
+                  IMG, DOCX, PDF or mp3 (MAX. 4GB).
                 </p>
                 <button
                   type="submit"
