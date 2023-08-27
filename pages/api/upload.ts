@@ -9,7 +9,7 @@ export const config = {
   },
 };
 
-const getFormData = async (
+const getFileData = async (
   req: NextApiRequest
 ): Promise<{ fields: formidable.Fields; files: formidable.Files }> => {
   const options: formidable.Options = {};
