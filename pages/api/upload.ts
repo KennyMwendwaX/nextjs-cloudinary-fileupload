@@ -9,48 +9,6 @@ export const config = {
   },
 };
 
-const readFile = async (
-  req: NextApiRequest,
-  saveLocally?: boolean
-): Promise<{ fields: formidable.Fields; files: formidable.Files }> => {
-  const options: formidable.Options = {};
-  if (saveLocally) {
-    options.uploadDir = path.join(process.cwd(), "/public/files");
-    options.filename = (name, ext, path, form) => {
-      return path.originalFilename as string;
-    };
-  }
-  options.maxFileSize = 4000 * 1024 * 1024;
-  const form = formidable(options);
-  return new Promise((resolve, reject) => {
-    form.parse(req, async (err, fields, files) => {
-      if (err) reject(err);
-      // The name "uploadedFile" comes from formData.append("uploadedFile", selectedFile)
-      const myFiles = files.uploadedFile as formidable.File[];
-      const file = myFiles[0];
-
-      try {
-        const uploaded_file = await prisma.file.create({
-          data: {
-            filename: file.newFilename,
-            fileType: file.mimetype as string,
-            fileSize: file.size,
-            filePath: file.filepath,
-          },
-        });
-
-        if (uploaded_file) {
-          resolve({ fields, files });
-        } else {
-          reject(new Error("Failed to save file details to the database."));
-        }
-      } catch (error) {
-        reject(error);
-      }
-    });
-  });
-};
-
 const getFormData = async (
   req: NextApiRequest
 ): Promise<{ fields: formidable.Fields; files: formidable.Files }> => {
