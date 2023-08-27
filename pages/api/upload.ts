@@ -39,7 +39,7 @@ export default async function handler(
     return res.status(405).json({ message: "Method Not Allowed" });
 
   try {
-    const { fields, files } = await getFormData(req);
+    const { fields, files } = await getFileData(req);
 
     const myFiles = files.picture as formidable.File[];
     const file = myFiles[0];
